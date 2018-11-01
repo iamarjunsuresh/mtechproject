@@ -11,7 +11,7 @@ function d= loadwriter( writerid )
 %generate 5 ranbdom no btwn 1 and 8 
 numbers=[1,2,3,4,5,6,7,8];
 
-numbertopick=1
+numbertopick=4
 pickednums=[]
 arrsize=size(numbers)
 arrsize=arrsize(2);
@@ -76,7 +76,7 @@ bothsides=5;
 picks=newsize/(1+2*bothsides);
 picknum=[]
 
-for i=1:picks
+for ii=1:picks
    ss=size(indices);
    ss=ss(2);
   selected=round((sz-1)*rand(1))+1;
@@ -92,20 +92,23 @@ for i=1:picks
 end
 
 
+% sort the indices
+
+sort(indices);
 finalt=[];
 for k=1:newsize
     finalt(k,:)=pointinfo(indices(k));
 
 
 end
+
+
+disp(i);
+an(i,:)=finalt(:)
  end
-d=finalt
+d=an
 %get x y t of all xml as multiple array
-
-
-
-
-
+ 
 % concatenate all xyt 's together
 
 
