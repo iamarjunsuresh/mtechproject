@@ -1,11 +1,12 @@
 
-writers=10060:1:10079
-sz=size(writers)
+writers=10060:1:10065;
+sz=size(writers);
 sz=sz(2);
+dds=[];
 for i=1:sz
 
-    dd=loadwriter(writers(i))
-    dds(i,:,:,:)=dd(:,:,:)
+    dd=loadwriter(writers(i));
+    dds=[dds dd];
 end
 
 
@@ -17,19 +18,19 @@ function d= loadwriter( writerid )
 %generate 5 ranbdom no btwn 1 and 8 
 numbers=[1,2,3,4,5,6,7,8];
 
-numbertopick=2
-pickednums=[]
-arrsize=size(numbers)
+numbertopick=2;
+pickednums=[];
+arrsize=size(numbers);
 arrsize=arrsize(2);
-finalt=[]
+finalt=[];
 
 for i=1:numbertopick 
    num=round(ceil(rand([1,1])*arrsize)); 
-   pickednums=[pickednums numbers(num)]
+   pickednums=[pickednums numbers(num)];
    numbers(num)=[];
-   arrsize=arrsize-1
+   arrsize=arrsize-1;
 end 
-
+%pickednums;
 writerinfo={};
 %load xml files
 for i =1:numbertopick
@@ -87,6 +88,7 @@ for ii=1:picks
    ss=size(indices);
    ss=ss(2);
   selected=round((ss-2*bothsides-1)*rand(1))+1+bothsides;
+%   disp(ss);
  picknum=[picknum indices(selected)];
  indices(selected)=[];
  for j=1:bothsides
@@ -103,16 +105,18 @@ end
 
 picknum=sort(picknum);
 %disp(picknum);
- 
+ f=[];
 for k=1:newsize
-    finalt(i,k,:)=pointinfo(picknum(k),:);
+    f=[f pointinfo(picknum(k),:)];
 
 
 end
+ 
 
+finalt(i,:)=f(:);
 end
 
-d=finalt
+d=finalt';
 %get x y t of all xml as multiple array
  
 % concatenate all xyt 's together
